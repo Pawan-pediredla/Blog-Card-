@@ -1,152 +1,52 @@
-<!-- Use Ctrl/Cmd + Shift + V in VS Code to preview this Markdown file. -->
+Project brief :
 
-# GreatFrontEnd Projects Challenge
+In this challenge, you will develop a blog card featuring editorial content, including an article cover image, a content category tag, a title, a brief description, and a call-to-action (CTA) link.
 
-Welcome to the GreatFrontEnd Projects platform! Join our [Discord server](https://www.greatfrontend.com/community) and get support from our community ranging from new developers to senior engineers from big tech companies!
+Implementation requirements :
 
-This is a starter template for your challenge.
+Design fidelity: Aim to follow the design as closely as possible. All elements in the design should be present, using the specified text color, font size, font weight, spacing, dimensions, etc.
+Link interactivity: Implement and style links to reflect different states - normal, hover and focus.
+Placeholders: You may leave the redirection links empty for any unspecified buttons or links.
+Cross-browser compatibility: Check that your solution works for major browsers including Chrome, Firefox and Safari.
+[Stretch goal] Performance optimization: Optimize image assets and code for quick load times, ensuring a smooth and responsive user experience.
+[Stretch goal] Accessibility and semantics: Follow best practices for web accessibility, such as using semantic HTML and ARIA roles where necessary, using proper alt tags for images and ensuring that buttons can be navigated to and selected using keyboard controls.
 
-## Getting started
+Relevant concepts
+These CSS concepts will be useful for this challenge.
 
-### Overview
+Box model: Understanding padding, borders, and margins is necessary for achieving the desired layout.
+Flex: Flex layouts are useful for adding gaps between a stack of elements. While flex is not the only way to achieve the layout, it is the modern way of doing so.
+Images: How to render images where the original image doesn't necessarily fit within the allocated dimensions.
+Recommended approach
+Build the page layout: Render a background color for the page. Within the page, add a horizontally-centered card that is a fixed distance of 120px from the top of the page.
+Build the card and its contents: Display the article image, badge, title, excerpt, and button link.
+Card structure
+Build the card container first, then add the contents starting from the top.
+Use semantic HTML elements to create containers for different parts of the card. For instance, you might have one <div> for the card itself, an <img> tag to display the blog article image, and another <div> for wrapping the textual content.
+You can use either an <img> or a <picture> tag to display the blog article image, just be sure to provide alt attributes for accessibility.
+Card layout
+Observe that the card has a fixed width of 340px and is a fixed distance of 120px from the top of the screen (it is not vertically centered!).
 
-At a high level, completing each challenge involves the following steps:
+Set a fixed width and margin-top for the card.
+The card should not have a hardcoded height value; its height should be according to the vertical space taken up by its contents. This is the behavior by default in CSS, so there are no extra steps needed.
+To horizontally center the card on the page, a simple way would be margin-left: auto; margin-right: auto or to make the card parent display: flex; justify-content: center.
+Since the the elements within the card are laid out in a vertical direction, there's no need to use display: flex for arranging the card elements. However, do try using display: flex; flex-direction: column and gap for the vertical spacing between the text elements.
+Styling the card and its contents
+When styling, use classes to apply styles to specific elements as opposed to inline styles. There can be more than one blog card per page, using classes will allow you to apply the styles to another blog card instance.
+Notice that the card has a box shadow, a border, a background color and rounded corners! Be sure to add the necessary styling.
+Refer to the style guide for the appropriate typography values and colors to use.
+Notice that the button link has a custom focus style.
+Ensuring cards have the same height
+In reality, blog cards are usually displayed in a list, along other blog cards. When they are placed side-by-side, it is more aesthetically pleasing for their contents (image, title, excerpt) to be aligned horizontally (at the same level). At the very least, the cards in a list should be of the same height. In fact, we use these techniques on this very platform to have same-height challenge cards and submission cards.
 
-1. Start the challenge from the challenge page.
-2. Understand the challenge's functional and visual requirements.
-3. Download starter code (optional), reference designs. For the best experience, obtain access to the Figma files.
-4. Set up your coding environment and GitHub repository.
-5. Develop using your preferred technology stack while referencing the designs, style guides, and any provided guides.
-6. Ask for help if necessary.
-7. Upon completion, review your work.
-8. Deploy your work on available hosting platforms.
-9. Submit your work and share it with the world!
+Let's see how we can achieve this.
 
-### Starter code
+Image
+Since the image can be of varying dimensions and aspect ratios, we can use a fixed height on the image and have the image fill up the entire allocated space.
 
-This starter template consists of the following files and directories:
+Common ways to display the images include using an <img> tag or the background-image CSS property. In the past, developers will lean towards using background-image because of the ability to use background-size: cover, which scales the image (while preserving its ratio) to the smallest possible size to fill the image container, leaving no empty space. These days, <img>s support the object-fit: cover property which achieves a similar effect.
 
-```bash
-├── README.md
-├── css
-│   └── style.css
-├── designs
-├── img
-├── index.html
-└── js
-    └── index.js
-```
+Text elements
+The title and excerpt can be longer than one sentence and two sentences respectively. One solution will be to clamp the text to a specific number of lines, using -webkit-line-clamp. Tailwind CSS' Line Clamp utility makes clamping text effortless.
 
-- `README.md`: This file.
-- `designs`: Responsive design images for the challenge. Your submission will be compared against some or all of these images.
-- `index.html`: Entrypoint for your website. You should be editing this file.
-- `css`: For writing any custom CSS styles to customize the appearance of the page.
-- `js`: For writing any custom JavaScript to add interactivity to the page.
-- `img`: Image assets used by the challenge.
-
-### Provided assets
-
-For each challenge, we provide the following assets:
-
-- **Starter/skeleton code**: `index.html`, `style.css`, and `index.js`.
-- **Designs**: The `designs` directory contains reference image design files for the various device breakpoints and states for the challenge. With only these images, it can be hard to determine the exact styling required, so `style-guide.md` contains valuable information about the design, such as device breakpoints, typography styles, and color palette.
-- **Images**: If the challenge uses some images such as illustrations, logos, etc, they will be provided in the `img` directory.
-- **Icons**: Icons can be found on [Remix Icon](https://remixicon.com/).
-
-For the best (and realistic) experience, we recommend developing while referencing the challenge's Figma file. If the challenge is free or you have a [GreatFrontEnd Projects Premium](https://greatfrontend.com/projects/pricing) subscription, you'd be able to download the challenge's `.fig` Figma file, which will allow you to emulate developers at work – inspecting high fidelity designs and diving into each element's properties like colors, font sizes, spacing, etc.
-
-### Using Figma files
-
-The downloaded `.fig` file can be opened using the [Figma website](https://www.figma.com/) or [desktop app](https://www.figma.com/downloads/). By inspecting the Figma file, you will be able to build as closely as possible to the design.
-
-If you are new to Figma, here are some useful resources to help you get acquainted with Figma:
-
-- [Intro to Figma for Developers by Scrimba](https://www.youtube.com/watch?v=fZ-OU_7aBv4)
-- [Figma Onboarding Kit for Developers](https://www.figma.com/community/file/1202517341060356377)
-- [Figma 101 for Developers](https://www.figma.com/community/file/1199577674592933191)
-
-As a developer, you do not have to learn how to create designs with Figma; you primarily have to know how to navigate a file, selecting frames, inspect properties of the elements such as their size, color, spacing, typography, etc.
-
-## Working on the challenge
-
-### Using GitHub for storing code with version control
-
-We will be using [GitHub](https://www.github.com/) to store your challenge code as it is the best place for developers to build up their coding portfolio. Many other developer-related services integrate with GitHub as well. If it's your first time using Git/GitHub, refer to [GitHub's beginner documentation](https://docs.github.com/en/get-started/getting-started-with-git).
-
-There are two common ways to go about developing the challenges:
-
-1. **Code first, GitHub repo later**: Jump right into developing your code. After you're done, set up a GitHub repository and push your code to the repo. If it's your first time doing a challenge and it is a small one, this approach might be more convenient.
-2. **GitHub repo first, code later**: For more complex and longer-term projects, it will be more advisable to set up a GitHub repository first and commit to the repository often so as to have better version control. **This is the recommended approach.**
-
-### Developing the challenge
-
-Out-of-the-box, our starter templates help you get started with the challenges using vanilla HTML, CSS, and JavaScript. The easiest way to start developing is to open the `index.html` file using an IDE (Integrated Development Editor) like [VS Code](https://code.visualstudio.com/) and start changing the code. To preview the result, open `index.html` using a web browser. Remember to refresh the browser to see any updates!
-
-That said, you are free to choose a technology stack as you deem fit – React, Next.js, Vite, Vue, you name it. Where relevant and possible, you can integrate these libraries into the starter template.
-
-You can even use the recommended starter code provided by your chosen tech stack but you will be in-charge of adding necessary code for CSS resets, copying any provided image assets over and importing the challenge font. There aren't a lot of them, so you can poke around the starter code files and easily identify what to copy into your custom setup.
-
-Here's a basic outline of the process of converting a design image into front end code:
-
-1. **Study the design**: Examine the design images / Figma files with the aim of understanding the layout, components, typography, colors, interactions and any responsive design requirements for different screen sizes. Be sure to also cross check with the provided style guide.
-2. **HTML structure**: Plan the HTML structure of the challenge based on the design. Use semantic HTML elements such as `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, and `<footer>`.
-3. **CSS styling**: Apply CSS styling to the HTML elements to match the visual design. Use CSS classes to set font styles, sizes, colors, margins, paddings, borders, and backgrounds while referring to the design, style guide, and Figma file.
-4. **Responsive design**: Implement responsive design techniques to ensure the website looks and functions well on different devices and screen sizes. Use media queries to adjust layout, font sizes, and other styling properties as needed for various breakpoints.
-5. **Interactivity and JavaScript**: Implement any interactive features or animations using JavaScript or front end frameworks like React or Vue.js.
-
-### Getting help
-
-It is common to get stuck while working on a challenge especially when it touches on unfamiliar topics or techniques. To get help, you can leverage the following:
-
-1. **Read the provided guides**: Our guides contain common problems people faced for the challenge and we offer resources and solutions to unblock yourself.
-2. **Leverage the challenge forum**: Use the "Discussions" tab for the challenge to either look at questions asked by others or ask your own question.
-3. **GreatFrontEnd community**: Join the [Discord community](https://www.greatfrontend.com/community) and get real-time support from the community.
-4. **[ChatGPT](https://chat.openai.com/)**: ChatGPT is great for answering common and introductory level questions. You can even send your code to ChatGPT for it to comment on.
-
-## Completing
-
-Well done completing the development! We're sure it looks fantastic, but before you put it up for the world to see, there are a few more things that should be done.
-
-### Review
-
-A good developer reviews their work during development, and definitely before deploying. Perform the following basic checks:
-
-1. **Code formatting**: Code formatting usually does not affect the end result of the website, but it helps make your code maintainable. Tools like [Prettier](https://prettier.io/) come in handy here. If you are using [VS Code](https://code.visualstudio.com/), do "Right click" -> "Format document" to format the file using the default formatters.
-2. **Test for responsiveness**: Check your website's responsiveness on different devices and screen sizes, including desktops, laptops, tablets, and smartphones. Verify that the layout adjusts smoothly and all content remains accessible and readable.
-3. **Check for content accuracy**: Review all text content, images, and multimedia elements to ensure accuracy, relevance, and proper formatting. Verify that there are no spelling or grammatical errors.
-
-These checks are non-exhaustive! The list goes on and the more complex your product is, the more things you should check for.
-
-### Deploy your site
-
-Deployment is the process of putting your website's code onto publicly-accessible web servers so that anyone in the world can visit your website.
-
-We recommend the following hosting providers where you can deploy your website for free:
-
-- [GitHub Pages](https://pages.github.com/): If you are using the default starter code template hosted on a public GitHub repository, this is the easiest and fastest way to get your site deployed.
-- [Vercel](https://www.vercel.com/): Vercel offers a one-click deployment experience just by connecting your GitHub repository and they have a generous free tier. Could be overkill for hosting static files that don't require a build step.
-- [Netlify](https://www.netlify.com/): Similar offerings as Vercel.
-
-### Submission
-
-Before submitting, ensure the following:
-
-1. **Your GitHub repository is public**. This allows the community to view your code and comment on it on your submission page.
-2. **Your completed challenge is hosted on a publicly-accessible URL**. This is important because we take screenshots of your website using various device breakpoints / screen widths and allow you to compare the differences between your implementation and the designs.
-
-Then head to the challenge page where you will find a "Submit" button. Clicking on the button leads you to a submit page where you can fill in additional details about your process. After the submission form is filled, you will be brought to your submission page and get points for completing the challenge!
-
-## Next steps
-
-Congratulations on submitting your completed challenge! 🚀 Here are some possible next steps you can take:
-
-1. **Start on a [new challenge](https://www.greatfrontend.com/projects/challenges)**: Most challenges use the same design system, and you will find that you can reuse some of the styles and components you have built in past challenges.
-2. **Show off your solution to the community**: Post a link to your completed challenge in the [Discord community](https://www.greatfrontend.com/community).
-3. **Share your solution on your social media accounts**: Share your achievements to your network by adding screenshots of your completed challenge and links to the live websites. Do mention us (@GreatFrontEnd on LinkedIn, Instagram, and Twitter/X), we'd love to see what you have built!
-4. **Write about your development process**: Platforms like [DEV Community](https://dev.to), [Hashnode](https://hashnode.com/), [Medium](https://medium.com/), and [HackerNoon](https://hackernoon.com/) are great for writing technical content to build your online presence and reinforce your understanding.
-
-## Have questions or feedback?
-
-At GreatFrontEnd projects, we greatly value receiving feedback as it helps us continuously improve and refine our products/services to better meet the needs and expectations of our customers and stakeholders. If you have any feedback or questions, the best channels to reach out would be our [Discord community](https://www.greatfrontend.com/community), our [LinkedIn Page](https://www.linkedin.com/company/greatfrontend), or send an email to contact@greatfrontend.com.
-
-🔥 Good luck on your Front End Developer journey! 🔥
+That said, truncation is not ideal because text is being hidden from users. Hence it is recommended to work with article authors to set a guidance on how many characters the title and excerpt should contain.
